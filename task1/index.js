@@ -28,7 +28,7 @@ const myReduce = (collection, callback, init) => {
 
 //Б
 
-const notes = [
+const NOTES = [
   {
     id: 1,
     title: "Recipe",
@@ -65,18 +65,21 @@ const notes = [
 
 //1
 
-const newNotes = myMap(notes, (item) => ({ id: item.id, title: item.title }));
-console.log(newNotes);
+const updatedNotes = myMap(NOTES, (item) => ({
+  id: item.id,
+  title: item.title,
+}));
+console.log(updatedNotes);
 
 //2
 
-const filteredNotes = myFilter(notes, (item) => item.isMarked);
+const filteredNotes = myFilter(NOTES, (item) => item.isMarked);
 console.log(filteredNotes);
 
 //3
 
 const pagesTotalCount = myReduce(
-  notes,
+  NOTES,
   (acc, item) => acc + item.pagesCount,
   0
 );
@@ -84,7 +87,7 @@ console.log(pagesTotalCount);
 
 //В
 
-const testArray = [1, 1, 1, 2, 2, 3, 4, 4, 5, 5, 5, 5];
+const TESTARRAY = [1, 1, 1, 2, 2, 3, 4, 4, 5, 5, 5, 5];
 
 const countNumbers = (obj, number) => {
   if (obj[number]) {
@@ -96,7 +99,7 @@ const countNumbers = (obj, number) => {
 };
 
 const getUnique = (arr) => {
-  let numbersCount = arr.reduce(countNumbers, {});
+  const numbersCount = arr.reduce(countNumbers, {});
   for (let key in numbersCount) {
     if (numbersCount[key] === 1) {
       return key;
@@ -104,5 +107,5 @@ const getUnique = (arr) => {
   }
 };
 
-const uniqueElement = getUnique(testArray);
+const uniqueElement = getUnique(TESTARRAY);
 console.log(uniqueElement);
