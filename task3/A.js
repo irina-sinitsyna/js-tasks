@@ -26,6 +26,12 @@ const DOWNLOADS = [
   },
 ];
 
+const NOTE_STATUSES = {
+  pending: "Pending",
+  done: "Done",
+  failed: "Failed",
+};
+
 const fillTheTable = (arr) => {
   let table = document.createElement("table");
   let thead = document.createElement("thead");
@@ -53,6 +59,7 @@ const fillTheTable = (arr) => {
     table.rows[i].cells[0].textContent = elem.id;
     table.rows[i].cells[1].innerHTML = elem.title;
     table.rows[i].cells[2].innerHTML = elem.status;
+    table.rows[i].cells[2].dataset.status = elem.status;
     i++;
   });
 };
@@ -67,23 +74,25 @@ let statusInterval = null;
 
 const checkStatus = () => {
   console.log("Status check started");
-  const taskStatus = document.querySelectorAll("tr td:nth-child(3)");
-  for (elem of taskStatus) {
-    if (elem.innerText === "Pending") {
-      elem.innerText = "Done";
-      return;
-    }
+  const taskWithPendingStatus = document.querySelector(
+    "[data-status='Pending']"
+  );
+  if (taskWithPendingStatus) {
+    taskWithPendingStatus.innerHTML = NOTE_STATUSES.done;
+    taskWithPendingStatus.dataset.status = taskWithPendingStatus.innerHTML;
+    return;
   }
   clearInterval(statusInterval);
 };
 
 const onClick = () => {
+  const MS = 5000;
   if (statusInterval) {
     alert("Status checking is in progress now");
   } else {
     setTimeout(() => {
       setTimeout(checkStatus, 0);
-      statusInterval = setInterval(checkStatus, 5000);
+      statusInterval = setInterval(checkStatus, MS);
     }, 3000);
   }
 };

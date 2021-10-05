@@ -87,7 +87,7 @@ console.log(pagesTotalCount);
 
 //В
 
-const TESTARRAY = [1, 1, 1, 2, 2, 3, 4, 4, 5, 5, 5, 5];
+const TEST_ARRAY = [1, 1, 1, 2, 2, 3, 4, 4, 5, 5, 5, 5];
 
 const countNumbers = (obj, number) => {
   if (obj[number]) {

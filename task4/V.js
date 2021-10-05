@@ -3,8 +3,9 @@ const getRandomNumber = (minValue, maxValue) => {
 };
 
 const promise = new Promise((resolve, reject) => {
-  let time = getRandomNumber(1, 3000);
-  if (time <= 2000) {
+  const MAX_EXECUTION_TIME = 2000;
+  const time = getRandomNumber(1, 3000);
+  if (time <= MAX_EXECUTION_TIME) {
     resolve("It works! Execution time did not exceed 2 seconds");
   } else {
     reject("Unfortunately, execution time exceeded 2 seconds");
